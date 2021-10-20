@@ -2,11 +2,8 @@ version: "3.4"
 services:
   rabbitmq:
     image: rabbitmq:management
+    container_name: 'infra-rabbitmq'
     ports:
       - "5672:5672"
       - "15672:15672"
-
-networks:
-  infra-network:
-    name: infra-network
-    external: true
+    network_mode: "host"

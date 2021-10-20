@@ -2,17 +2,16 @@ version: "3.4"
 services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
-    container_name: 'zookeeper'
+    container_name: 'infra-zookeeper'
     ports:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-    networks:
-      - infra-network
+    network_mode: "host"
 
   kafka:
     image: 'bitnami/kafka:latest'
-    container_name: 'kafka'
+    container_name: 'infra-kafka'
     ports:
       - '9092:9092'
       - '9093:9093'
@@ -29,10 +28,4 @@ services:
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
     depends_on:
       - zookeeper
-    networks:
-      - infra-network
-
-networks:
-  infra-network:
-    name: infra-network
-    external: true
+    network_mode: "host"
