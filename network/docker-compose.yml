@@ -1,0 +1,5 @@
+version: "3.4"
+networks:
+  infra-network:
+    name: infra-network
+    driver: bridge

@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+  prometheus:
+    image: "prom/prometheus"
+    volumes:
+      - ./infrastructure/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    container_name: prometheus
+    networks:
+      - infra-network
+
+  grafana:
+    image: "grafana/grafana"
+    ports:
+      - "3000:3000"
+    container_name: grafana
+    networks:
+      - infra-network
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
+    external: true
+
+networks:
+  infra-network:
+    name: infra-network
+    external: true
