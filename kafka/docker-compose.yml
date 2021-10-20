@@ -2,16 +2,17 @@ version: "3.4"
 services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
-    container_name: 'infra-zookeeper'
+    container_name: 'zookeeper'
     ports:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-    network_mode: "host"
+    networks:
+      - kafka-network
 
   kafka:
     image: 'bitnami/kafka:latest'
-    container_name: 'infra-kafka'
+    container_name: 'kafka'
     ports:
       - '9092:9092'
       - '9093:9093'
@@ -19,7 +20,7 @@ services:
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=infra-zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
@@ -27,5 +28,11 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
     depends_on:
-      - infra-zookeeper
-    network_mode: "host"
+      - zookeeper
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    name: kafka-network
+    driver: bridge
