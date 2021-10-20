@@ -32,14 +32,32 @@ getDir()
     local dir=''
 
     case "$infra" in
-    sonar|sonar_qube|sonarqube|sonar-qube)
-        dir="sonar-qube"
+    cassandra)
+        dir="cassandra"
+        ;;
+    consul)
+        dir="consul"
+        ;;
+    kafka)
+        dir="kafka"
         ;;
     mysql)
         dir="mysql"
         ;;
-    kafka)
-        dir="kafka"
+    network)
+        dir="network"
+        ;;
+    prometheus|grafana)
+        dir="prometheus_grafana"
+        ;;
+    rabbitmq|rabbit)
+        dir="prometheus_grafana"
+        ;;
+    redis)
+        dir="prometheus_grafana"
+        ;;
+    sonar|sonar_qube|sonarqube|sonar-qube)
+        dir="sonar-qube"
         ;;
     esac
 
