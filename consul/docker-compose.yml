@@ -2,7 +2,7 @@ version: "3.4"
 services:
   consul:
     image: bitnami/consul:latest
-    container_name: 'infra-consul'
+    container_name: 'consul'
     volumes:
       - ./data:/bitnami
     ports:
@@ -12,4 +12,3 @@ services:
       - '8500:8500'
       - '8600:8600'
       - '8600:8600/udp'
-    network_mode: "host"

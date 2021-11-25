@@ -2,7 +2,9 @@ version: "3.4"
 services:
   cassandra:
     image: "cassandra:3.11.9"
-    container_name: 'infra-cassandra'
+    container_name: 'cassandra'
+    volumes:
+      - ./local-data:/var/lib/cassandra
     ports:
       - "9042:9042"
     environment:
