@@ -19,5 +19,10 @@ docker-compose up -d
 docker-compose down
 ```
 
+<div align="center">
+    <img src="./docker.png"/>
+</div>
+
+
 ## Reference
 - https://github.com/jonatan-ivanov/local-services
